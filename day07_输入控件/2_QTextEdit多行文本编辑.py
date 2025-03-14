@@ -13,6 +13,7 @@ class Window(QWidget):
         self.resize(500, 500)
         self.setWindowTitle("QFrame的学习")
         self.setup_ui()
+
     def text_changed(self):
         print("文本改变了")
         print(self.te.toPlainText()) #获取纯文本内容
