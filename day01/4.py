@@ -6,7 +6,6 @@ File       : 3_QPlainTextEdit纯文本编辑.py
 content:
 result:··
 """
-#获取粉丝数
 import csv,json,math,time
 from tqdm import tqdm
 import requests
