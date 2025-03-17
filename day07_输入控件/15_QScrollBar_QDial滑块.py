@@ -21,8 +21,6 @@ class Window(QWidget):
         lable.setText("设置值改变信号")
         lable.move(100,400)
 
-
-
         dia=QDial(self)
         dia.resize(200,200)
         dia.move(200,200)

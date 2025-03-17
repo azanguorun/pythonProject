@@ -6,7 +6,7 @@ class Window(QWidget):
     def __init__(self):
         super().__init__()
         self.resize(500, 500)
-        self.setWindowTitle("QFrame的学习")
+        self.setWindowTitle("QInputDialog的学习")
         self.setup_ui()
     def setup_ui(self):
         result=QInputDialog.getInt(self,'整数输入框','请输入数字',88,1,100,1)

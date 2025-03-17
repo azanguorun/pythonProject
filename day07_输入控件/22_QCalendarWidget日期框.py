@@ -6,7 +6,7 @@ class Window(QWidget):
     def __init__(self):
         super().__init__()
         self.resize(500, 500)
-        self.setWindowTitle("QFrame的学习")
+        self.setWindowTitle("QCalendarWidget的学习")
         self.setup_ui()
     def setup_ui(self):
         cw=QCalendarWidget(self)

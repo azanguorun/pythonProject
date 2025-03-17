@@ -1,9 +1,5 @@
 '''
-
 QAbsetractButton 抽象按钮
-
-
-
 '''
 
 from PyQt5.Qt import *

@@ -4,7 +4,7 @@ import sys
 app = QApplication(sys.argv)
 window = QWidget()
 window.setWindowTitle("文本编辑框案例")
-
+QFrame
 frame=QFrame(window)
 frame.resize(window.width()-10,window.height()-10)
 frame.move(5,5)
