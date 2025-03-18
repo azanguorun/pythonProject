@@ -9,6 +9,7 @@ class Window(QWidget):
         self.setWindowTitle("Q的学习")
         self.setup_ui()
 
+    # noinspection PyInterpreter
     def setup_ui(self):
         h_layout = QHBoxLayout()
         h_layout.addWidget(QRadioButton('男'))

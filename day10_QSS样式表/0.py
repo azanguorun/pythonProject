@@ -13,7 +13,10 @@ class Window(QWidget):
         frame.resize(300, 300)
         QMessageBox.about(frame, '标题', '内容')
         QBoxLayout # 布局管理器
-        QFormLayout # 表单布局
+        QGridLayout  # 网格布局
+        QFormLayout  # 表单布局
+        QStackedLayout # 层叠布局
+        QHBoxLayout  # 水平布局
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = Window()

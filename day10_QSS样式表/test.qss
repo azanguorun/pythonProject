@@ -1,0 +1,56 @@
+QWidget#box2 QPushButton{
+    background-color:blue;
+    }
+QWidget:focus{
+    border:3px dotted green;
+    }
+QWidget:!focus{
+    border:3px dotted indigo;
+    }
+QWidget:disabled{
+    font-size:20px;
+    background-color: orange;
+    }
+QWidget:enabled{
+    font-size:16px;
+    background-color: lightgray;
+    }
+
+QPushButton#btn2 {
+    background-color:green;
+    border:1px solid red;
+    }
+QPushButton:hover{
+    border:3px solid green;
+}
+QPushButton:pressed{
+    border:3px solid orange;
+}
+
+#pink{
+    background-color:pink;
+    }
+
+
+
+QLabel{
+    background-color:orange;
+}
+.QLabel[notice_level="error"]{
+    border:3px solid red;
+}
+.QLabel[notice_level="warning"]{
+    border:3px solid yellow;
+}
+
+QCheckBox::indicator{
+    width:20px;
+    height:20px;
+}
+QCheckBox:checked:hover{
+    background-color:green;
+}
+QCheckBox::indicator:checked{
+    image:url("./1.jpg");
+}
+

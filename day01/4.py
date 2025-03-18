@@ -19,9 +19,6 @@ today = time.strftime("%y-%m-%d", time.localtime(int(t))) #今日日期
 
 csrf='37f317ce7c817ba8507a3110b087b974'
 SESSDATA='85151f10%2C1755909450%2C5e8ff%2A22CjDvAFGmLSY0YfKE9w5ILLg0pL3weTxFPWKiCi9Cj4G3rF6TL0mcVaNL1GoBA7XsSmoSVkxxcEVYdlFLOUYyc2tIaDRtYW9xa1E1VTVUSG1BNVh6dDZ1WDVZMnF4SnBKbTZtaFNCeV81RmlPYVgtbXg5MTVsQ3hDcDNqMU5EalYwMkVmTVlPSGtnIIEC'
-
-
-
 fl='关注2'
 class MyThread(threading.Thread):
     def __init__(self, func, args=()):
@@ -39,8 +36,6 @@ class MyThread(threading.Thread):
             return self.result
         except Exception:
             return None
-
-
 
 def readFocusFile():
     with open(f'./b站/'+fl+'.json', mode='r', encoding='utf-8-sig') as f:
