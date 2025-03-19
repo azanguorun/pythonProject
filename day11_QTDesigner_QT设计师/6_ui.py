@@ -8,18 +8,20 @@ class Window(QWidget):
         self.resize(500, 500)
         self.setWindowTitle("Q的学习")
         self.setup_ui()
+
     def setup_ui(self):
-        frame = QFrame(self)
-        frame.resize(300, 300)
-        QMessageBox.about(frame, '标题', '内容')
-        QBoxLayout # 布局管理器
-        QGridLayout  # 网格布局
-        QFormLayout  # 表单布局
-        QStackedLayout # 层叠布局
-        QHBoxLayout  # 水平布局
+        from PyQt5.uic import loadUi
+        loadUi('5_login_ui.ui', self)
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = Window()
     window.show()
-
+    print(dir(window))
+    def click():
+        account=window.lineEdit.text()
+        pwd=window.lineEdit_2.text()
+        print(account,pwd)
+    window.pushButton.clicked.connect(click)
     sys.exit(app.exec_())

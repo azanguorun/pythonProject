@@ -9,17 +9,18 @@ class Window(QWidget):
         self.setWindowTitle("Q的学习")
         self.setup_ui()
     def setup_ui(self):
-        frame = QFrame(self)
-        frame.resize(300, 300)
-        QMessageBox.about(frame, '标题', '内容')
-        QBoxLayout # 布局管理器
-        QGridLayout  # 网格布局
-        QFormLayout  # 表单布局
-        QStackedLayout # 层叠布局
-        QHBoxLayout  # 水平布局
+        pass
+
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = Window()
-    window.show()
 
+
+    from login_ui import Ui_Form
+    ui=Ui_Form()
+    ui.setupUi(window)
+
+    window.show()
     sys.exit(app.exec_())
