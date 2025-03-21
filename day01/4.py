@@ -262,7 +262,7 @@ def get_json_data(stat,last_time,data,fl):
         json.dump(params, r,ensure_ascii=False)
         # r.write(str(params))
 
-    print(time.strftime("%y-%m-%d", time.localtime(int(time.time()))))
+    print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(time.time()))))
 if __name__ == '__main__':
     # 视频稍后观看
     readFocusFile()
