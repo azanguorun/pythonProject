@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -94,7 +97,7 @@ QPushButton:checked {
     <string>退出</string>
    </property>
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="reset_menue_btn">
@@ -123,10 +126,10 @@ QPushButton:checked {
     <string>重置</string>
    </property>
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
+  <widget class="QPushButton" name="about_menue_btn">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -152,7 +155,7 @@ QPushButton:checked {
     <string>关于</string>
    </property>
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -192,7 +195,7 @@ font: 10pt &quot;黑体&quot;;</string>
      </widget>
     </item>
     <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_2">
+     <widget class="QLineEdit" name="password_le">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -204,6 +207,9 @@ font: 10pt &quot;黑体&quot;;</string>
 color: rgb(197, 197, 197);
 border:none;
 border-bottom:1px solid lightgray;;</string>
+      </property>
+      <property name="clearButtonEnabled">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -219,7 +225,7 @@ font: 10pt &quot;黑体&quot;;</string>
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_3">
+     <widget class="QLineEdit" name="confirm_pwd_le">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -231,11 +237,14 @@ font: 10pt &quot;黑体&quot;;</string>
 color: rgb(197, 197, 197);
 border:none;
 border-bottom:1px solid lightgray;;</string>
+      </property>
+      <property name="clearButtonEnabled">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="account_le">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -248,10 +257,16 @@ color: rgb(197, 197, 197);
 border:none;
 border-bottom:1px solid lightgray;;</string>
       </property>
+      <property name="clearButtonEnabled">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
     <item row="3" column="0" colspan="2">
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="register_btn">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -263,6 +278,9 @@ border-bottom:1px solid lightgray;;</string>
 	color: rgb(255, 255, 255);
 	background-color: rgb(85, 170, 255);
 	border-radius: 10px;
+}
+QPushButton:disabled{
+	background-color: rgb(20, 47, 66);
 }
 QPushButton:hover{
 	background-color: rgb(185, 231, 255);
@@ -278,6 +296,11 @@ QPushButton:pressed{
     </item>
    </layout>
   </widget>
+  <zorder>exit_menue_btn</zorder>
+  <zorder>reset_menue_btn</zorder>
+  <zorder>about_menue_btn</zorder>
+  <zorder>layoutWidget</zorder>
+  <zorder>main_menue_btn</zorder>
  </widget>
  <resources>
   <include location="../images.qrc"/>
@@ -285,7 +308,7 @@ QPushButton:pressed{
  <connections>
   <connection>
    <sender>main_menue_btn</sender>
-   <signal>clicked()</signal>
+   <signal>clicked(bool)</signal>
    <receiver>Form</receiver>
    <slot>show_hide_menue()</slot>
    <hints>
@@ -300,7 +323,7 @@ QPushButton:pressed{
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_5</sender>
+   <sender>about_menue_btn</sender>
    <signal>clicked()</signal>
    <receiver>Form</receiver>
    <slot>about_lk()</slot>
@@ -348,7 +371,7 @@ QPushButton:pressed{
    </hints>
   </connection>
   <connection>
-   <sender>pushButton</sender>
+   <sender>register_btn</sender>
    <signal>clicked()</signal>
    <receiver>Form</receiver>
    <slot>check_reqister()</slot>
@@ -363,6 +386,54 @@ QPushButton:pressed{
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>account_le</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>enable_register_btn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>522</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>password_le</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>enable_register_btn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>361</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>517</x>
+     <y>223</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>confirm_pwd_le</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>Form</receiver>
+   <slot>enable_register_btn()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>385</x>
+     <y>257</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>512</x>
+     <y>257</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>show_hide_menue()</slot>
@@ -370,5 +441,6 @@ QPushButton:pressed{
   <slot>reset()</slot>
   <slot>exit_pane()</slot>
   <slot>check_reqister()</slot>
+  <slot>enable_register_btn()</slot>
  </slots>
 </ui>

@@ -259,7 +259,7 @@ def get_json_data(stat,last_time,data,fl):
 
     with open(f'./b站/'+fl+'.json', 'w', encoding='utf-8-sig') as r:
         # 将dict写入名称为r的文件中k
-        json.dump(params, r,ensure_ascii=False)
+        json.dump(params, r,ensure_ascii=False,indent=4)
         # r.write(str(params))
 
     print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(time.time()))))
