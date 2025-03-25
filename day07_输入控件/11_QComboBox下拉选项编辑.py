@@ -16,6 +16,9 @@ class Window(QWidget):
         cb.addItems(["男","女"])
         cb.insertItem(2,QIcon("1.jpg"),"或")
         cb.insertItems(2,["1","2","3"])
+        cb.down_arrow_icon=QIcon("1.jpg")
+
+
 
         cb.setItemText(3,"4")
         cb.insertSeparator(2) #插入分隔符

@@ -7,8 +7,8 @@ class RegisterPane(QWidget, Ui_Form):
     exit_signal = pyqtSignal() # 退出信号
     register_account_pwd_signal = pyqtSignal(str, str) # 注册信号
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self,parent=None,*args,**kwargs):
+        super().__init__(parent,*args,**kwargs)
         self.setAttribute(Qt.WA_StyledBackground, True)  # 设置样式表
         self.setupUi(self)
         self.animation_targets=[self.exit_menue_btn,self.reset_menue_btn,self.about_menue_btn]
@@ -39,21 +39,21 @@ class RegisterPane(QWidget, Ui_Form):
         animation_group.start(QAbstractAnimation.DeleteWhenStopped)
 
     def about_lk(self):
-        print('关于')
-        QMessageBox.about(self,'bing','https://cn.bing.com/')
+        # print('关于')
+        QMessageBox.about(self,'bilibili','https://www.bilibili.com/')
 
     def reset(self):
-        print('重置')
+        # print('重置')
         self.account_le.clear()
         self.password_le.clear()
         self.confirm_pwd_le.clear()
 
     def exit_pane(self):
-        print('退出')
+        # print('退出')
         self.exit_signal.emit()
 
     def check_reqister(self):
-        print('注册')
+        # print('注册')
         self.register_account_pwd_signal.emit(self.account_le.text(), self.password_le.text())
 
     def enable_register_btn(self):
@@ -65,6 +65,8 @@ class RegisterPane(QWidget, Ui_Form):
             self.register_btn.setEnabled(True)
         else:
             self.register_btn.setEnabled(False)
+
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
