@@ -1,5 +1,10 @@
 '''
 文件入口
+pyinstaller  打包工具    把python代码打包成exe文件
+pip install pyinstaller -i https://pypi.tuna.tsinghua.edu.cn/simple
+pyinstaller -v
+pyinstaller -F -w main.py      打包成一个exe文件   -w 去掉控制台窗口  生成的文件在dist文件夹下
+
 '''
 from PyQt5.Qt import *
 import sys

@@ -48,7 +48,6 @@ def readFocusFile():
             last_time=data_json['ts1']
         elif stat=='2':  #
             last_time=data_json['ts2']
-        # print(data_json)
         data=data_json['data']
         data=data[::-1]
         print(data)
@@ -64,7 +63,6 @@ def readFocusFile():
                 state=data[da]['state']#0:有价值 1:吃屎 2:静默
                 if state==stat:
                     offset = ''
-                    # print(user_name)
                     ups = [
                         {
                             'uuid': '1',
@@ -120,7 +118,7 @@ def readFocusFile():
                     #     ss = 1
                     data[da]['tt']=pub_tt
             else:
-                print('过')
+                pass
     get_json_data(stat,last_time,data,fl)
 
     tt=math.ceil((int(time.time())-t)/60)
@@ -163,7 +161,6 @@ def Filedynamic(threadName,up,last_time,user_id, user_name,tt,offset):
 
                 mblog_type = item['type']
                 id_str = item['id_str']
-                # print(mblog_type)
                 if mblog_type == 'DYNAMIC_TYPE_AV' and int(last_time) <= pub_ts:
                     title = item['modules']['module_dynamic']['major']['archive']['title']  # 发布时间
 
@@ -175,7 +172,7 @@ def Filedynamic(threadName,up,last_time,user_id, user_name,tt,offset):
                     if text == '投稿视频':
                         mblog_url = 'https://t.bilibili.com/' + id_str  # 动态的链接
                     # exit()
-                        MyDynamic(threadName,aid, name,pub_tt,mblog_url, title)
+                        MyDynamic(last_time,threadName,aid, name,pub_tt,mblog_url, title)
                         data = [mblog_url, name, title]
                         writefile(data)
 
@@ -200,7 +197,7 @@ def Filedynamic(threadName,up,last_time,user_id, user_name,tt,offset):
     # print(user_id, user_name, pub_tt)
     return pub_tt
 #添加稍后观看
-def MyDynamic(threadName,aid, name,pub_tt,mblog_url, title):
+def MyDynamic(last_time,threadName,aid, name,pub_tt,mblog_url, title):
     # time.sleep(4)
     headers = {
         "accept": "*/*",
@@ -225,14 +222,13 @@ def MyDynamic(threadName,aid, name,pub_tt,mblog_url, title):
     }
 
     response = requests.post(url, headers=headers,cookies=cookies, data=data)
-    data = [response.json(),aid, name,mblog_url, title]
-    print(data)
+    lt=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(last_time)))
+    print([lt,pub_tt,response.json(),aid, name,mblog_url, title])
     if '-352'==response.json()['message']:
         time.sleep(30)
         print('再次请求点击')
-        MyDynamic(threadName,aid, name,pub_tt, mblog_url, title)
-    # print(response.text)
-    # print(response)
+        MyDynamic(last_time,threadName,aid, name,pub_tt, mblog_url, title)
+
 
 def writefile(data):
     # 打开文件，以追加模式写入，文件路径为'b站/b站视频.csv'，编码方式为'utf-8'，换行符为空
