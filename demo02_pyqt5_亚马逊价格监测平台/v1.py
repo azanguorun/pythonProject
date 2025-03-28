@@ -1,3 +1,9 @@
+'''
+
+(venv) PS C:\Users\Administrator\PycharmProjects\pythonProject\demo02_pyqt5_亚马逊价格监测平台> pyinstaller -D v1.py -w
+
+'''
+
 import sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel,QDesktopWidget,QHBoxLayout,QVBoxLayout
@@ -17,9 +23,19 @@ STATUS_MAPPING = {
 } #状态映射
 
 
+RUNNING=1
+STOPING=2
+STOP=3
+
+
 class Window(QWidget):
     def __init__(self):
         super().__init__()
+
+        self.switch=STOP  # 状态  1 2 3  运行 暂停 停止
+
+        self.txt_asin=None  #输入框
+
         self.setWindowTitle("QFrame的学习")
         self.resize(1220, 300)
 
@@ -241,8 +257,6 @@ class Window(QWidget):
 
         for row in row_list:
             index=row.row()
-            print(index)
-
             #1.更新表格中的状态
             cell_status = QTableWidgetItem('0')
             cell_status.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)  # 设置 0,4,5,6 单元格不可编辑   要在创建单元格后设置
@@ -317,21 +331,66 @@ class Window(QWidget):
 
     def event_start_click(self):
         '''开始'''
+        if self.switch != STOP :
+            QMessageBox.warning(self,'警告','检测正在进行中')
+            return
+        self.switch=RUNNING
+
         from utils.scheduler import Scheduler
-        self.update_status_message('检测开始','color:green;')
-        Scheduler.start()
+        self.update_status_message('检测开始')
+        Scheduler.start(
+            BASE_DIR,
+            self,
+            self.task_start_callback,
+            self.task_stop_callback,
+            self.task_counter_callback,
+            self.task_error_callback
+        )
+
+    def task_start_callback(self,row_index):
+        '''以后对表格中状态更新'''
+        cell_status = QTableWidgetItem(STATUS_MAPPING.get(2))
+        cell_status.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)  # 设置 0,4,5,6 单元格不可编辑   要在创建单元格后设置
+        self.table_widget.setItem(row_index, 6, cell_status)
+
+    def task_counter_callback(self,row_index):
+        '''以后对表格中成功次数更新 原有次数+1'''
+        old_success_count=int(self.table_widget.item(row_index,4).text())
+        new_success_count=old_success_count+1
+        cell_status = QTableWidgetItem(str(new_success_count))
+        cell_status.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)  # 设置 0,4,5,6 单元格不可编辑   要在创建单元格后设置
+        self.table_widget.setItem(row_index, 4, cell_status)
+
+    def task_error_callback(self,row_index):
+        '''以后对表格中失败次数更新 原有次数+1'''
+        old_error_count=int(self.table_widget.item(row_index,5).text())
+        new_error_count=old_error_count+1
+        cell_status = QTableWidgetItem(str(new_error_count))
+        cell_status.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)  # 设置 0,4,5,6 单元格不可编辑   要在创建单元格后设置
+        self.table_widget.setItem(row_index, 5, cell_status)
+
+    def task_stop_callback(self,row_index):
+        cell_status = QTableWidgetItem(STATUS_MAPPING.get(1))
+        cell_status.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEnabled)  # 设置 0,4,5,6 单元格不可编辑   要在创建单元格后设置
+        self.table_widget.setItem(row_index, 6, cell_status)
 
     def event_stop_click(self):
         '''停止  执行中的线程逐一停止'''
+        if self.switch!=RUNNING:
+            QMessageBox.warning(self,'警告','检测未开始')
+            return
+
+        self.switch=STOPING
         from utils.scheduler import Scheduler
-        self.update_status_message('检测停止','color:red;')
+        # self.update_status_message('检测停止')
         Scheduler.stop()
 
 
-    def update_status_message(self,message,color):
+    def update_status_message(self,message):
         '''更新状态信息'''
+        if message=='所有线程已停止':
+            self.switch=STOP
         self.lable_status.setText(message)
-        self.lable_status.setStyleSheet(color)
         self.lable_status.repaint()
 
 
