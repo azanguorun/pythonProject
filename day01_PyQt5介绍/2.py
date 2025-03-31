@@ -2,7 +2,7 @@
 """
 Project    : python_text
 Time       ：2025/1/14 上午11:56
-File       : 2.py
+File       : pyuic5转换类.py
 目的: 
 内容:
 结果:
