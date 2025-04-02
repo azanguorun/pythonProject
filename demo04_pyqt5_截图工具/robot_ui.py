@@ -94,13 +94,30 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
+        #下拉框添加选项
+        self.comboBox.addItem("")
+        self.comboBox.addItem("截图定位")
+        self.comboBox.addItem("鼠标单击")
+        self.comboBox.addItem("输入文本")
+        #添加命令
+        self.pushButton_2.clicked.connect(MainWindow.addOperate)
+        #执行命令
+        self.pushButton_6.clicked.connect(MainWindow.execution)
 
+
+        #截图按钮
+        self.pushButton.setStatusTip("开始截图")
+        self.pushButton.setToolTip("开始截图")
         self.pushButton.clicked.connect(MainWindow.Screenshot)  # 开始截图按钮
-        # self.pushButton_2.clicked.connect(MainWindow.add_step)  # 添加按钮
-        # self.pushButton_3.clicked.connect(MainWindow.delete_step)  # 删除按钮
-        # self.pushButton_4.clicked.connect(MainWindow.modify_step)  # 修改按钮
 
+        self.pushButton_3.clicked.connect(MainWindow.deleteOpt)  # 删除按钮
+        self.listWidget.itemDoubleClicked.connect(MainWindow.deleteOpt) # 删除按钮
 
+        self.pushButton_4.clicked.connect(MainWindow.updateOpt)  # 修改按钮
+
+        self.pushButton_5.setEnabled(False)
+
+        self.pushButton_7.clicked.connect(MainWindow.openOpt)
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
